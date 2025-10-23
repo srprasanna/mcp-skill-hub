@@ -2,7 +2,7 @@
 name = "mcp-skills-server"
 version = "0.1.0"
 description = "MCP server for dynamic Claude skill loading with hot-reload support"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Prasanna Raghu"]
 readme = "README.md"
 license = "MIT"
 homepage = "https://github.com/yourusername/mcp-skills-server"
