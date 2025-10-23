@@ -1,0 +1,48 @@
+Advanced Example - Sample Data File
+====================================
+
+This is a text example file that can be referenced in the skill.
+
+Example Data Format:
+-------------------
+
+Skill: advanced-example
+Version: 2.0.1
+Complexity: advanced
+
+Features:
+- Complete metadata coverage
+- Multiple example files
+- Template files
+- Dependency tracking
+- Related skill linking
+
+When to Use:
+- Need a comprehensive reference
+- Building complex skills
+- Want to include multiple examples
+- Organizing skills with categories and tags
+
+Example Configuration:
+---------------------
+{
+  "skill_name": "advanced-example",
+  "enabled": true,
+  "options": {
+    "hot_reload": true,
+    "validate_examples": true
+  }
+}
+
+Notes:
+-----
+This file demonstrates that example files can be in any format:
+- Plain text (.txt)
+- Python (.py)
+- JSON (.json)
+- Markdown (.md)
+- YAML (.yaml)
+- Any other format you need!
+
+The skill server will validate that these files exist when the
+skill is loaded, ensuring broken references are caught early.

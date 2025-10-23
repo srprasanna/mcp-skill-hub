@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # Production service
+  mcp-skills:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
+    container_name: mcp-skills-server
+    volumes:
+      # Mount your skills directory (each skill in its own folder)
+      # IMPORTANT: Change this path to your actual skills directory
+      - ./examples/skills:/skills:ro
+    environment:
+      - MCP_SKILLS_DIR=/skills
+      - MCP_SKILLS_HOT_RELOAD=true
+      - MCP_SKILLS_LOG_LEVEL=INFO
+      - MCP_SKILLS_DEBOUNCE_DELAY=0.5
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    # Optionally expose for debugging (MCP uses stdio, not network)
+    # ports:
+    #   - "8080:8080"
+
+  # Development service with hot-reload of code
+  mcp-skills-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    container_name: mcp-skills-dev
+    volumes:
+      # Mount skills directory (read-only for safety)
+      - ./examples/skills:/skills:ro
+      # Mount source code for development (allows code changes without rebuild)
+      - ./src:/app/src:ro
+    environment:
+      - MCP_SKILLS_DIR=/skills
+      - MCP_SKILLS_HOT_RELOAD=true
+      - MCP_SKILLS_LOG_LEVEL=DEBUG
+      - MCP_SKILLS_DEBOUNCE_DELAY=0.5
+    stdin_open: true
+    tty: true
+    command: poetry run python -m mcp_skills
+    # For development, you might want to see output
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

@@ -1,0 +1,54 @@
+---
+# Skill Template
+# This is a template file that can be used as a starting point
+---
+
+name: "your-skill-name"
+description: "Brief description of your skill"
+version: "1.0.0"
+author: "Your Name"
+created: "YYYY-MM-DD"
+updated: "YYYY-MM-DD"
+
+dependencies:
+  python: []  # Python packages if needed
+  system: []  # System tools if needed
+
+category: "your-category"
+tags: ["tag1", "tag2", "tag3"]
+complexity: "beginner"  # or intermediate, advanced
+
+when_to_use:
+  - "Use case 1"
+  - "Use case 2"
+
+related_skills: []
+
+has_examples: false
+example_files: []
+---
+
+# Your Skill Title
+
+Brief introduction to your skill.
+
+## Purpose
+
+Explain what this skill does and why it's useful.
+
+## Usage
+
+Provide clear usage instructions.
+
+## Examples
+
+Include examples if applicable.
+
+## Best Practices
+
+Share tips and best practices.
+
+---
+
+This template can be customized for your specific skill needs.
+Simply copy it to a new skill folder and fill in the details!

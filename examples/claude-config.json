@@ -1,0 +1,30 @@
+{
+  "mcpServers": {
+    "skills": {
+      "comment": "Using Docker (recommended for production)",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-v",
+        "${HOME}/claude-skills:/skills:ro",
+        "mcp-skills-server"
+      ]
+    },
+    "skills-dev": {
+      "comment": "Using Poetry directly (development)",
+      "command": "poetry",
+      "args": [
+        "run",
+        "mcp-skills"
+      ],
+      "cwd": "/path/to/mcp-skills-server",
+      "env": {
+        "MCP_SKILLS_DIR": "/path/to/your/skills/directory",
+        "MCP_SKILLS_LOG_LEVEL": "DEBUG",
+        "MCP_SKILLS_HOT_RELOAD": "true"
+      }
+    }
+  }
+}
