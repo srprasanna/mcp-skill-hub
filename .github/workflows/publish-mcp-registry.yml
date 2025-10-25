@@ -13,8 +13,11 @@ on:
 
 # Required permissions for GitHub authentication
 permissions:
-  contents: read
   id-token: write
+  contents: write
+  packages: write
+  pull-requests: write
+  actions: write
 
 env:
   MCP_PUBLISHER_VERSION: 'latest'
