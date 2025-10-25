@@ -4,7 +4,7 @@
   "title": "MCP Skills Server",
   "description": "MCP server that loads and serves skills from a mounted directory with hot reload.",
   "version": "1.0.0",
-  "websiteUrl": "https://github.com/srprasanna/mcp-skill-hub",
+  "websiteUrl": "https://srprasanna.github.io/mcp-skill-hub",
   "repository": {
     "url": "https://github.com/srprasanna/mcp-skill-hub",
     "source": "github"
