@@ -44,10 +44,14 @@ jobs:
 
       - name: Update server.json version
         run: |
-          # Update version in server.json to match pyproject.toml
-          jq --arg version "${{ steps.get_version.outputs.version }}" '.version = $version' server.json > server.json.tmp
+          version="${{ steps.get_version.outputs.version }}"
+          image_repo="docker.io/srprasanna/mcp-skills-server"
+          jq --arg version "$version" --arg identifier "${image_repo}:$version" '
+            .version = $version
+            | .packages[0].identifier = $identifier
+          ' server.json > server.json.tmp
           mv server.json.tmp server.json
-          echo "Updated server.json to version ${{ steps.get_version.outputs.version }}"
+          echo "✅ Updated server.json to version $version and identifier $identifier"
 
       - name: Commit server.json version update
         run: |

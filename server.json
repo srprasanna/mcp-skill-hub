@@ -1,83 +1,44 @@
 {
-  "$schema": "https://registry.modelcontextprotocol.io/schema/server.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
   "name": "io.github.srprasanna/mcp-skills-server",
-  "displayName": "MCP Skills Server",
+  "title": "MCP Skills Server",
   "description": "A production-ready MCP server that dynamically loads and exposes skills from a mounted volume with hot-reloading support",
   "version": "1.0.0",
-  "homepage": "https://github.com/srprasanna/mcp-skill-hub",
-  "license": "MIT",
-  "categories": [
-    "productivity",
-    "development"
-  ],
-  "tags": [
-    "skills",
-    "dynamic-loading",
-    "hot-reload",
-    "markdown",
-    "docker"
-  ],
-  "author": {
-    "name": "Prasanna Raghu",
-    "url": "https://github.com/srprasanna"
+  "websiteUrl": "https://github.com/srprasanna/mcp-skill-hub",
+  "repository": {
+    "url": "https://github.com/srprasanna/mcp-skill-hub",
+    "source": "github"
   },
-  "sourceCode": {
-    "type": "git",
-    "url": "https://github.com/srprasanna/mcp-skill-hub.git"
-  },
-  "deployment": {
-    "type": "package",
-    "package": {
-      "type": "docker",
-      "registry": "docker.io",
-      "image": "srprasanna/mcp-skills-server",
-      "command": [],
-      "args": [],
-      "env": {
-        "MCP_SKILLS_DIR": {
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "docker.io/srprasanna/mcp-skills-server:1.0.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "MCP_SKILLS_DIR",
           "description": "Root directory containing skill folders",
           "default": "/skills",
-          "required": false
+          "isRequired": false
         },
-        "MCP_SKILLS_HOT_RELOAD": {
+        {
+          "name": "MCP_SKILLS_HOT_RELOAD",
           "description": "Enable automatic reloading when SKILL.md files change",
           "default": "true",
-          "required": false
+          "isRequired": false
         },
-        "MCP_SKILLS_LOG_LEVEL": {
+        {
+          "name": "MCP_SKILLS_LOG_LEVEL",
           "description": "Logging verbosity: DEBUG, INFO, WARNING, ERROR, CRITICAL",
           "default": "INFO",
-          "required": false
-        }
-      }
-    }
-  },
-  "capabilities": {
-    "resources": true,
-    "tools": true,
-    "prompts": false,
-    "sampling": false
-  },
-  "installation": {
-    "docker": {
-      "image": "srprasanna/mcp-skills-server:latest",
-      "volumes": [
-        {
-          "host": "${HOME}/skills",
-          "container": "/skills",
-          "mode": "ro"
+          "isRequired": false
         }
       ]
-    },
-    "poetry": {
-      "command": "poetry",
-      "args": [
-        "run",
-        "mcp-skills"
-      ],
-      "env": {
-        "MCP_SKILLS_DIR": "./examples/skills"
-      }
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "migratedFrom": "https://registry.modelcontextprotocol.io/schema/server.json"
     }
   }
 }
