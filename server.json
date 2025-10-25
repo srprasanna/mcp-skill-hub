@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
   "name": "io.github.srprasanna/mcp-skills-server",
   "title": "MCP Skills Server",
-  "description": "A production-ready MCP server that dynamically loads and exposes skills from a mounted volume with hot-reloading support",
+  "description": "MCP server that loads and serves skills from a mounted directory with hot reload.",
   "version": "1.0.0",
   "websiteUrl": "https://github.com/srprasanna/mcp-skill-hub",
   "repository": {
