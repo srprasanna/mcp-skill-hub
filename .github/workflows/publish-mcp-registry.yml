@@ -25,9 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v5
+
 
       - id: install-jq
         name: Install jq
@@ -75,133 +74,47 @@ jobs:
           echo "Server configuration:"
           jq '.' server.json
 
-      - name: Install MCP Publisher CLI
+      - id: install-mcp-publisher
+        name: Install MCP Publisher
+        shell: bash
         run: |
-          # Download and install mcp-publisher
-          # Check for latest release
-          LATEST_RELEASE=$(curl -s https://api.github.com/repos/modelcontextprotocol/mcp-publisher/releases/latest | jq -r .tag_name)
-
-          if [ -z "$LATEST_RELEASE" ] || [ "$LATEST_RELEASE" = "null" ]; then
-            echo "⚠️  Could not fetch latest release, using default version"
-            LATEST_RELEASE="v0.1.0"
-          fi
-
-          echo "Installing mcp-publisher $LATEST_RELEASE"
-
-          # Download binary for Linux amd64
-          DOWNLOAD_URL="https://github.com/modelcontextprotocol/mcp-publisher/releases/download/${LATEST_RELEASE}/mcp-publisher-linux-amd64"
-
-          curl -L -o mcp-publisher "$DOWNLOAD_URL"
-          chmod +x mcp-publisher
+          # Install MCP Publisher
+          # Resolve the latest release tag (e.g., v1.2.3)
+          latest_tag=$(curl -s https://api.github.com/repos/modelcontextprotocol/registry/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+          # Strip the leading 'v' if present
+          version=${latest_tag#v}
+          # Construct platform-specific filename
+          platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
+          arch="$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/')"
+          filename="mcp-publisher_${version}_${platform}_${arch}.tar.gz"
+          # Download and extract
+          echo "Downloading installer $filename"
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/download/${latest_tag}/${filename}" | tar xz mcp-publisher
+          # Move to /usr/local/bin
           sudo mv mcp-publisher /usr/local/bin/
-
-          # Verify installation
-          mcp-publisher --version || echo "MCP Publisher installed"
-
-      - name: Authenticate with GitHub (for io.github.* namespace)
+          # Print installed version
+          echo "MCP Publisher: `mcp-publisher --version`"
+      
+      - id: publish-mcp-registry
+        name: Publish to MCP Registry
+        shell: bash
         run: |
-          # The MCP publisher uses GitHub token for authentication
-          # when publishing to io.github.* namespaces
-          echo "Authenticating with GitHub for namespace: io.github.srprasanna/*"
+          # Publish to MCP Registry
+          mcp-publisher --version
+          mcp-publisher login github-oidc
+          mcp-publisher publish
+          mcp-publisher logout
 
-          # Set up credentials
-          export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
-
-          echo "✅ GitHub authentication ready"
-
-      - name: Dry Run - Validate Configuration
-        if: github.event.inputs.dry_run == 'true'
+      - id: show-mcp-registration
+        name: Show MCP registration
+        shell: bash
+        if: always()
         run: |
-          echo "🔍 Running validation (dry run mode)"
-
-          # Validate server.json against schema
-          mcp-publisher validate server.json || {
-            echo "❌ Validation failed"
-            exit 1
-          }
-
-          echo "✅ Validation successful - ready to publish"
-
-      - name: Publish to MCP Registry
-        if: github.event.inputs.dry_run != 'true'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "📦 Publishing to MCP Registry..."
-
-          # Publish the server
-          mcp-publisher publish server.json --token "$GITHUB_TOKEN" || {
-            echo "❌ Publishing failed"
-            echo ""
-            echo "Common issues:"
-            echo "1. Server name already exists in registry"
-            echo "2. Authentication failure - check GitHub token permissions"
-            echo "3. server.json validation errors"
-            echo "4. Docker image not available at specified registry"
-            exit 1
-          }
-
-          echo "✅ Successfully published to MCP Registry!"
-          echo ""
-          echo "Your server is now available at:"
-          echo "https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skills-server"
-
-      - name: Verify Publication
-        if: github.event.inputs.dry_run != 'true'
-        run: |
-          echo "🔍 Verifying publication..."
-          sleep 5  # Wait for registry to update
-
-          # Check if server appears in registry
-          SERVER_NAME="io.github.srprasanna/mcp-skills-server"
-
-          curl -s "https://registry.modelcontextprotocol.io/api/v1/servers/${SERVER_NAME}" | jq '.' || {
-            echo "⚠️  Could not verify server in registry yet"
-            echo "This may take a few minutes to propagate"
-          }
-
-      - name: Create registry publication summary
-        if: github.event.inputs.dry_run != 'true'
-        run: |
-          cat >> $GITHUB_STEP_SUMMARY << 'EOF'
-          ## 🎉 Published to MCP Registry
-
-          **Server Name:** `io.github.srprasanna/mcp-skills-server`
-          **Version:** `${{ steps.get_version.outputs.version }}`
-
-          ### Registry Links
-          - 🔗 [View in MCP Registry](https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skills-server)
-          - 📦 [Docker Image](https://hub.docker.com/r/srprasanna/mcp-skills-server)
-          - 📖 [Source Code](https://github.com/srprasanna/mcp-skill-hub)
-
-          ### Installation
-
-          Users can now install your MCP server using:
-
-          ```bash
-          # Via Docker
-          docker pull srprasanna/mcp-skills-server:latest
-
-          # Via MCP Registry
-          mcp install io.github.srprasanna/mcp-skills-server
-          ```
-
-          ### Next Steps
-          - Monitor registry for user feedback
-          - Update documentation with registry links
-          - Share your server with the MCP community
-          EOF
-
-      - name: Dry run summary
-        if: github.event.inputs.dry_run == 'true'
-        run: |
-          cat >> $GITHUB_STEP_SUMMARY << 'EOF'
-          ## ✅ Dry Run Successful
-
-          **Server Name:** `io.github.srprasanna/mcp-skills-server`
-          **Version:** `${{ steps.get_version.outputs.version }}`
-
-          The validation passed! Your server configuration is ready to be published.
-
-          To publish for real, run this workflow again with `dry_run: false`
-          EOF
+          # Show last registered version
+          curl -s -X GET "https://registry.modelcontextprotocol.io/v0/servers?search=schemacrawler-ai" \
+            -H "accept: application/json" | \
+          jq '.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true) | {name: .server.name, version: .server.version, _meta}' > \
+            output.json
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          cat output.json >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
