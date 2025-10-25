@@ -246,3 +246,24 @@ jobs:
         run: |
           docker pull ghcr.io/${{ github.repository_owner }}/mcp-skills-server:${{ needs.bump-version.outputs.new_version }}
           echo "Docker image pulled successfully"
+
+  publish-to-mcp-registry:
+    name: Publish to MCP Registry
+    runs-on: ubuntu-latest
+    needs: [bump-version, create-release, build-and-push-docker, test-release]
+    if: github.event.inputs.docker_registry == 'docker.io'
+    steps:
+      - name: Trigger MCP Registry Publication
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'publish-mcp-registry.yml',
+              ref: 'main',
+              inputs: {
+                dry_run: 'false'
+              }
+            });
+            console.log('✅ Triggered MCP Registry publication workflow')
