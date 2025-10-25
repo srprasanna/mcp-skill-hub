@@ -115,7 +115,7 @@ jobs:
         if: always()
         run: |
           # Show last registered version
-          curl -s -X GET "https://registry.modelcontextprotocol.io/v0/servers?search=schemacrawler-ai" \
+          curl -s -X GET "https://registry.modelcontextprotocol.io/v0/servers?search=mcp-skills-server" \
             -H "accept: application/json" | \
           jq '.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true) | {name: .server.name, version: .server.version, _meta}' > \
             output.json
