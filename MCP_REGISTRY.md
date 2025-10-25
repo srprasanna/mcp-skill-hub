@@ -31,7 +31,7 @@ The `server.json` file defines your server's metadata and deployment configurati
 
 ```json
 {
-  "name": "io.github.srprasanna/mcp-skills-server",
+  "name": "io.github.srprasanna/mcp-skill-hub",
   "displayName": "MCP Skills Server",
   "description": "A production-ready MCP server...",
   "version": "1.0.0",
@@ -39,7 +39,7 @@ The `server.json` file defines your server's metadata and deployment configurati
     "type": "package",
     "package": {
       "type": "docker",
-      "image": "srprasanna/mcp-skills-server"
+      "image": "srprasanna/mcp-skill-hub"
     }
   }
 }
@@ -77,7 +77,7 @@ Publishing happens automatically when you create a Docker Hub release:
 
 3. **Verification**:
    - Check workflow output for MCP Registry publication
-   - View your server at: `https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skills-server`
+   - View your server at: `https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skill-hub`
 
 ### Method 2: Manual Trigger
 
@@ -151,7 +151,7 @@ gh workflow run publish-mcp-registry.yml -f dry_run=true
 After publishing, your server will be available at:
 
 ```
-https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skills-server
+https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skill-hub
 ```
 
 ## User Installation
@@ -160,13 +160,13 @@ Once published, users can install your server:
 
 ### Via MCP CLI (if available)
 ```bash
-mcp install io.github.srprasanna/mcp-skills-server
+mcp install io.github.srprasanna/mcp-skill-hub
 ```
 
 ### Via Docker
 ```bash
-docker pull srprasanna/mcp-skills-server:latest
-docker run -v ~/skills:/skills srprasanna/mcp-skills-server
+docker pull srprasanna/mcp-skill-hub:latest
+docker run -v ~/skills:/skills srprasanna/mcp-skill-hub
 ```
 
 ### Via Claude Desktop Config
@@ -179,7 +179,7 @@ Users add to their `claude_desktop_config.json`:
       "args": [
         "run", "-i", "--rm",
         "-v", "${HOME}/skills:/skills:ro",
-        "srprasanna/mcp-skills-server"
+        "srprasanna/mcp-skill-hub"
       ]
     }
   }
@@ -227,7 +227,7 @@ When you release a new version:
 
 **Fix**:
 1. Publish Docker image first (via Release workflow)
-2. Verify image exists: `docker pull srprasanna/mcp-skills-server:latest`
+2. Verify image exists: `docker pull srprasanna/mcp-skill-hub:latest`
 3. Wait a few minutes for Docker Hub to propagate
 
 ### "server.json validation failed"
@@ -275,7 +275,7 @@ After publishing, monitor:
 |------|---------|
 | Validate config | `gh workflow run publish-mcp-registry.yml -f dry_run=true` |
 | Publish manually | `gh workflow run publish-mcp-registry.yml -f dry_run=false` |
-| View in registry | https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skills-server |
+| View in registry | https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skill-hub |
 | Update server | Create new release via Release workflow |
 
 ---

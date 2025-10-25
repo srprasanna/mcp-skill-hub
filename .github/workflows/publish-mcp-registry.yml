@@ -48,7 +48,7 @@ jobs:
       - name: Update server.json version
         run: |
           version="${{ steps.get_version.outputs.version }}"
-          image_repo="docker.io/srprasanna/mcp-skills-server"
+          image_repo="docker.io/srprasanna/mcp-skill-hub"
           jq --arg version "$version" --arg identifier "${image_repo}:$version" '
             .version = $version
             | .packages[0].identifier = $identifier
@@ -115,7 +115,7 @@ jobs:
         if: always()
         run: |
           # Show last registered version
-          curl -s -X GET "https://registry.modelcontextprotocol.io/v0/servers?search=mcp-skills-server" \
+          curl -s -X GET "https://registry.modelcontextprotocol.io/v0/servers?search=mcp-skill-hub" \
             -H "accept: application/json" | \
           jq '.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true) | {name: .server.name, version: .server.version, _meta}' > \
             output.json

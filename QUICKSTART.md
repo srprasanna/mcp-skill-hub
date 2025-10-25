@@ -13,8 +13,8 @@ Get up and running with MCP Skills Server in 5 minutes!
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/mcp-skills-server.git
-cd mcp-skills-server
+git clone https://github.com/yourusername/mcp-skill-hub.git
+cd mcp-skill-hub
 
 # Install dependencies
 poetry install
@@ -24,7 +24,7 @@ poetry install
 
 ```bash
 # Build the Docker image
-docker build -t mcp-skills-server .
+docker build -t mcp-skill-hub .
 ```
 
 ## Step 2: Create Your First Skill
@@ -82,7 +82,7 @@ poetry run mcp-skills
 ```bash
 docker run -i --rm \
   -v ~/claude-skills:/skills:ro \
-  mcp-skills-server
+  mcp-skill-hub
 ```
 
 ## Step 4: Verify It Works
@@ -129,7 +129,7 @@ Add to your Claude Desktop config file:
         "--rm",
         "-v",
         "${HOME}/claude-skills:/skills:ro",
-        "mcp-skills-server"
+        "mcp-skill-hub"
       ]
     }
   }
@@ -144,7 +144,7 @@ Or for Poetry:
     "skills": {
       "command": "poetry",
       "args": ["run", "mcp-skills"],
-      "cwd": "/path/to/mcp-skills-server",
+      "cwd": "/path/to/mcp-skill-hub",
       "env": {
         "MCP_SKILLS_DIR": "/path/to/your/claude-skills"
       }

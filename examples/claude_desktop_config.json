@@ -10,7 +10,7 @@
         "--rm",
         "-v",
         "${HOME}/skills:/skills:ro",
-        "mcp-skills-server"
+        "mcp-skill-hub"
       ]
     },
     "skills-dev": {

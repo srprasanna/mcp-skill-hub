@@ -17,7 +17,7 @@ This is a **production-ready MCP (Model Context Protocol) server** for dynamical
 ## Project Structure
 
 ```
-mcp-skills-server/
+mcp-skill-hub/
 ├── src/mcp_skills/                 # Source code
 │   ├── models/
 │   │   └── skill.py                # Pydantic Skill model
@@ -360,7 +360,7 @@ Example:
 
 ### 1. Docker (Recommended for Production)
 ```bash
-docker run -i --rm -v ~/claude-skills:/skills:ro mcp-skills-server
+docker run -i --rm -v ~/claude-skills:/skills:ro mcp-skill-hub
 ```
 
 ### 2. Docker Compose (Development)

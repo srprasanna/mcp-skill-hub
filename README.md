@@ -3,12 +3,12 @@
 [![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
 [![Poetry](https://img.shields.io/badge/poetry-1.7+-blue.svg)](https://python-poetry.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![MCP Registry](https://img.shields.io/badge/MCP-Registry-purple.svg)](https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skills-server)
-[![Docker](https://img.shields.io/docker/v/srprasanna/mcp-skills-server?label=docker)](https://hub.docker.com/r/srprasanna/mcp-skills-server)
+[![MCP Registry](https://img.shields.io/badge/MCP-Registry-purple.svg)](https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skill-hub)
+[![Docker](https://img.shields.io/docker/v/srprasanna/mcp-skill-hub?label=docker)](https://hub.docker.com/r/srprasanna/mcp-skill-hub)
 
 A production-ready [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that dynamically loads and exposes skills from a mounted volume with hot-reloading support.
 
-> 📦 **Available on [MCP Registry](https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skills-server)** - Install with one command!
+> 📦 **Available on [MCP Registry](https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skill-hub)** - Install with one command!
 
 ## Features
 
@@ -115,7 +115,7 @@ EOF
 ```bash
 docker run -i --rm \
   -v ~/claude-skills:/skills:ro \
-  mcp-skills-server
+  mcp-skill-hub
 ```
 
 ### Using Poetry (Development)
@@ -123,8 +123,8 @@ docker run -i --rm \
 1. **Clone and install:**
 
 ```bash
-git clone https://github.com/yourusername/mcp-skills-server.git
-cd mcp-skills-server
+git clone https://github.com/yourusername/mcp-skill-hub.git
+cd mcp-skill-hub
 poetry install
 ```
 
@@ -154,8 +154,8 @@ poetry run mcp-skills
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/mcp-skills-server.git
-cd mcp-skills-server
+git clone https://github.com/yourusername/mcp-skill-hub.git
+cd mcp-skill-hub
 
 # Install dependencies
 poetry install
@@ -168,7 +168,7 @@ poetry run mcp-skills --help
 
 ```bash
 # Build the image
-docker build -t mcp-skills-server .
+docker build -t mcp-skill-hub .
 
 # Or use docker-compose
 docker-compose build
@@ -192,7 +192,7 @@ poetry run mcp-skills
 docker run -i --rm \
   -v /path/to/your/skills:/skills:ro \
   -e MCP_SKILLS_LOG_LEVEL=INFO \
-  mcp-skills-server
+  mcp-skill-hub
 ```
 
 ### Running with Docker Compose
@@ -217,7 +217,7 @@ Add to your Claude Desktop configuration (`claude_desktop_config.json`):
         "--rm",
         "-v",
         "${HOME}/claude-skills:/skills:ro",
-        "mcp-skills-server"
+        "mcp-skill-hub"
       ]
     }
   }
@@ -232,7 +232,7 @@ Add to your Claude Desktop configuration (`claude_desktop_config.json`):
     "skills": {
       "command": "poetry",
       "args": ["run", "mcp-skills"],
-      "cwd": "/path/to/mcp-skills-server",
+      "cwd": "/path/to/mcp-skill-hub",
       "env": {
         "MCP_SKILLS_DIR": "/path/to/your/skills"
       }
@@ -411,8 +411,8 @@ List all valid skill folders found in the skills directory.
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/mcp-skills-server.git
-cd mcp-skills-server
+git clone https://github.com/yourusername/mcp-skill-hub.git
+cd mcp-skill-hub
 
 # Install dependencies (including dev dependencies)
 poetry install
@@ -481,7 +481,7 @@ poetry run black . && poetry run ruff check . && poetry run mypy src
 ### Project Structure
 
 ```
-mcp-skills-server/
+mcp-skill-hub/
 ├── src/mcp_skills/          # Source code
 │   ├── models/              # Data models
 │   ├── parsers/             # Skill parsers
@@ -612,8 +612,8 @@ The workflow will:
 - ✅ Run tests to verify release
 
 **Docker Images:**
-- Docker Hub: `{username}/mcp-skills-server:{version}`
-- GitHub: `ghcr.io/{owner}/mcp-skills-server:{version}`
+- Docker Hub: `{username}/mcp-skill-hub:{version}`
+- GitHub: `ghcr.io/{owner}/mcp-skill-hub:{version}`
 
 See [RELEASING.md](docs/RELEASING.md) for detailed release documentation.
 

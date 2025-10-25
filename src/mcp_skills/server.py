@@ -70,7 +70,7 @@ class SkillsServer:
         self.parser = MarkdownSkillParser(config.skills_dir)
         self.scanner = SkillScanner(config.skills_dir, self.parser)
         self.watcher: Optional[SkillWatcher] = None
-        self.mcp_server = Server("mcp-skills-server")
+        self.mcp_server = Server("mcp-skill-hub")
 
         # Setup MCP handlers
         self._setup_handlers()
@@ -419,9 +419,7 @@ class SkillsServer:
         else:
             raise ValueError(f"Unknown tool: {name}")
 
-    async def _tool_search_skills(
-        self, arguments: dict[str, Any]
-    ) -> list[TextContent]:
+    async def _tool_search_skills(self, arguments: dict[str, Any]) -> list[TextContent]:
         """Search skills tool implementation."""
         results = self.repository.search(
             query=arguments.get("query"),
@@ -512,9 +510,9 @@ class SkillsServer:
                         "has_skill_file": has_skill_file,
                         "is_valid": is_valid,
                         "status": (
-                            "valid" if is_valid and has_skill_file
-                            else "missing_skill_file" if is_valid
-                            else "invalid_folder"
+                            "valid"
+                            if is_valid and has_skill_file
+                            else "missing_skill_file" if is_valid else "invalid_folder"
                         ),
                     }
                 )

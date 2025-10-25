@@ -86,7 +86,7 @@ jobs:
       - name: Update server.json version
         run: |
           NEW_VERSION="${{ steps.bump.outputs.new_version }}"
-          IMAGE_REPO="docker.io/srprasanna/mcp-skills-server"
+          IMAGE_REPO="docker.io/srprasanna/mcp-skill-hub"
           if [ -f "server.json" ]; then
             jq --arg version "$NEW_VERSION" --arg identifier "${IMAGE_REPO}:$NEW_VERSION" '
               .version = $version
@@ -203,7 +203,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ github.event.inputs.docker_registry == 'docker.io' && format('{0}/{1}', secrets.DOCKER_USERNAME, 'mcp-skills-server') || format('ghcr.io/{0}/mcp-skills-server', github.repository_owner) }}
+            ${{ github.event.inputs.docker_registry == 'docker.io' && format('{0}/{1}', secrets.DOCKER_USERNAME, 'mcp-skill-hub') || format('ghcr.io/{0}/mcp-skill-hub', github.repository_owner) }}
           tags: |
             type=semver,pattern={{version}},value=${{ needs.bump-version.outputs.new_version }}
             type=semver,pattern={{major}}.{{minor}},value=${{ needs.bump-version.outputs.new_version }}
@@ -266,13 +266,13 @@ jobs:
       - name: Test Docker image (Docker Hub)
         if: github.event.inputs.docker_registry == 'docker.io'
         run: |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/mcp-skills-server:${{ needs.bump-version.outputs.new_version }}
+          docker pull ${{ secrets.DOCKER_USERNAME }}/mcp-skill-hub:${{ needs.bump-version.outputs.new_version }}
           echo "Docker image pulled successfully"
 
       - name: Test Docker image (GHCR)
         if: github.event.inputs.docker_registry == 'ghcr.io'
         run: |
-          docker pull ghcr.io/${{ github.repository_owner }}/mcp-skills-server:${{ needs.bump-version.outputs.new_version }}
+          docker pull ghcr.io/${{ github.repository_owner }}/mcp-skill-hub:${{ needs.bump-version.outputs.new_version }}
           echo "Docker image pulled successfully"
 
   publish-to-mcp-registry:

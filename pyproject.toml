@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "mcp-skills-server"
+name = "mcp-skill-hub"
 version = "1.0.0"
 description = "MCP server for dynamic Claude skill loading with hot-reload support"
 authors = ["Prasanna Raghu"]
 readme = "README.md"
 license = "MIT"
-homepage = "https://github.com/yourusername/mcp-skills-server"
-repository = "https://github.com/yourusername/mcp-skills-server"
+homepage = "https://github.com/yourusername/mcp-skill-hub"
+repository = "https://github.com/yourusername/mcp-skill-hub"
 keywords = ["mcp", "claude", "skills", "ai", "llm"]
 classifiers = [
     "Development Status :: 4 - Beta",

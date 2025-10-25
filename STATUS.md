@@ -213,8 +213,8 @@ poetry run mcp-skills
 
 ### Production (Docker)
 ```bash
-docker build -t mcp-skills-server .
-docker run -i --rm -v ~/claude-skills:/skills:ro mcp-skills-server
+docker build -t mcp-skill-hub .
+docker run -i --rm -v ~/claude-skills:/skills:ro mcp-skill-hub
 ```
 
 ### Testing
@@ -233,7 +233,7 @@ poetry run mypy src
 ## 📦 Project Files
 
 ```
-mcp-skills-server/
+mcp-skill-hub/
 ├── src/mcp_skills/                 ✅ Complete
 │   ├── models/skill.py             ✅ 236 lines
 │   ├── parsers/base.py             ✅ 175 lines

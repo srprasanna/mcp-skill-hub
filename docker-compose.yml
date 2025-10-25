@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: runtime
-    container_name: mcp-skills-server
+    container_name: mcp-skill-hub
     volumes:
       # Mount your skills directory (each skill in its own folder)
       # IMPORTANT: Change this path to your actual skills directory

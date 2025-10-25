@@ -95,8 +95,8 @@ The workflow consists of 4 jobs that run in sequence:
   - Major only: `1`
   - `latest`
 - Pushes to selected registry:
-  - **Docker Hub**: `{username}/mcp-skills-server:{version}`
-  - **GHCR**: `ghcr.io/{owner}/mcp-skills-server:{version}`
+  - **Docker Hub**: `{username}/mcp-skill-hub:{version}`
+  - **GHCR**: `ghcr.io/{owner}/mcp-skill-hub:{version}`
 - Uses layer caching for faster builds
 
 ### 4. Test Release
@@ -146,24 +146,24 @@ Each release creates multiple tags:
 
 ```bash
 # For version 1.2.3:
-mcp-skills-server:1.2.3      # Full version
-mcp-skills-server:1.2        # Major.Minor
-mcp-skills-server:1          # Major only
-mcp-skills-server:latest     # Always points to latest release
+mcp-skill-hub:1.2.3      # Full version
+mcp-skill-hub:1.2        # Major.Minor
+mcp-skill-hub:1          # Major only
+mcp-skill-hub:latest     # Always points to latest release
 ```
 
 ### Using the Docker Image
 
 **Docker Hub:**
 ```bash
-docker pull {username}/mcp-skills-server:latest
-docker run -v /path/to/skills:/skills {username}/mcp-skills-server:latest
+docker pull {username}/mcp-skill-hub:latest
+docker run -v /path/to/skills:/skills {username}/mcp-skill-hub:latest
 ```
 
 **GitHub Container Registry:**
 ```bash
-docker pull ghcr.io/{owner}/mcp-skills-server:latest
-docker run -v /path/to/skills:/skills ghcr.io/{owner}/mcp-skills-server:latest
+docker pull ghcr.io/{owner}/mcp-skill-hub:latest
+docker run -v /path/to/skills:/skills ghcr.io/{owner}/mcp-skill-hub:latest
 ```
 
 ## Monitoring Releases
@@ -181,8 +181,8 @@ After successful completion:
 
 1. **GitHub Release**: Check the [Releases](https://github.com/{owner}/{repo}/releases) page
 2. **Git Tag**: `git fetch --tags && git tag -l`
-3. **Docker Hub**: Visit https://hub.docker.com/r/{username}/mcp-skills-server/tags
-4. **GHCR**: Visit https://github.com/{owner}/{repo}/pkgs/container/mcp-skills-server
+3. **Docker Hub**: Visit https://hub.docker.com/r/{username}/mcp-skill-hub/tags
+4. **GHCR**: Visit https://github.com/{owner}/{repo}/pkgs/container/mcp-skill-hub
 
 ## Troubleshooting
 
@@ -240,13 +240,13 @@ git tag -a "v$NEW_VERSION" -m "Release v$NEW_VERSION"
 git push --tags
 
 # Build Docker image
-docker build -t mcp-skills-server:$NEW_VERSION --build-arg VERSION=$NEW_VERSION .
+docker build -t mcp-skill-hub:$NEW_VERSION --build-arg VERSION=$NEW_VERSION .
 
 # Tag and push
-docker tag mcp-skills-server:$NEW_VERSION {username}/mcp-skills-server:$NEW_VERSION
-docker tag mcp-skills-server:$NEW_VERSION {username}/mcp-skills-server:latest
-docker push {username}/mcp-skills-server:$NEW_VERSION
-docker push {username}/mcp-skills-server:latest
+docker tag mcp-skill-hub:$NEW_VERSION {username}/mcp-skill-hub:$NEW_VERSION
+docker tag mcp-skill-hub:$NEW_VERSION {username}/mcp-skill-hub:latest
+docker push {username}/mcp-skill-hub:$NEW_VERSION
+docker push {username}/mcp-skill-hub:latest
 
 # Create GitHub release manually via UI
 ```

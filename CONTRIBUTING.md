@@ -37,8 +37,8 @@ This project adheres to a code of conduct that all contributors are expected to 
 1. **Fork and clone the repository:**
 
 ```bash
-git clone https://github.com/your-username/mcp-skills-server.git
-cd mcp-skills-server
+git clone https://github.com/your-username/mcp-skill-hub.git
+cd mcp-skill-hub
 ```
 
 2. **Install dependencies:**
@@ -452,7 +452,7 @@ Any other context, examples, or screenshots.
 
 If you have questions:
 1. Check the [README](README.md)
-2. Look through existing [issues](https://github.com/yourusername/mcp-skills-server/issues)
+2. Look through existing [issues](https://github.com/yourusername/mcp-skill-hub/issues)
 3. Open a new issue with your question
 
 ## Recognition

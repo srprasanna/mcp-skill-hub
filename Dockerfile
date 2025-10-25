@@ -72,8 +72,8 @@ LABEL org.opencontainers.image.title="MCP Skills Server" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.vendor="Beehyv" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.source="https://github.com/srprasanna/mcp-skills-server" \
-      io.modelcontextprotocol.server.name="io.github.srprasanna/mcp-skills-server"
+      org.opencontainers.image.source="https://github.com/srprasanna/mcp-skill-hub" \
+      io.modelcontextprotocol.server.name="io.github.srprasanna/mcp-skill-hub"
 
 # Entry point
 ENTRYPOINT ["python", "-m", "mcp_skills"]

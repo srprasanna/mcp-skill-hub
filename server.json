@@ -1,6 +1,6 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-  "name": "io.github.srprasanna/mcp-skills-server",
+  "name": "io.github.srprasanna/mcp-skill-hub",
   "title": "MCP Skills Server",
   "description": "MCP server that loads and serves skills from a mounted directory with hot reload.",
   "version": "1.0.0",
@@ -12,7 +12,7 @@
   "packages": [
     {
       "registryType": "oci",
-      "identifier": "docker.io/srprasanna/mcp-skills-server:1.0.0",
+      "identifier": "docker.io/srprasanna/mcp-skill-hub:1.0.0",
       "transport": {
         "type": "stdio"
       },
