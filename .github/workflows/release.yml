@@ -85,13 +85,21 @@ jobs:
 
       - name: Update server.json version
         run: |
-          # Update server.json to match pyproject.toml version
           NEW_VERSION="${{ steps.bump.outputs.new_version }}"
-
+          IMAGE_REPO="docker.io/srprasanna/mcp-skills-server"
           if [ -f "server.json" ]; then
-            jq --arg version "$NEW_VERSION" '.version = $version' server.json > server.json.tmp
+            jq --arg version "$NEW_VERSION" --arg identifier "${IMAGE_REPO}:$NEW_VERSION" '
+              .version = $version
+              | .packages |= map(
+                  if .registryType == "oci" then
+                    .identifier = $identifier
+                  else
+                    .
+                  end
+                )
+            ' server.json > server.json.tmp
             mv server.json.tmp server.json
-            echo "✅ Updated server.json to version $NEW_VERSION"
+            echo "✅ Updated server.json to version $NEW_VERSION and identifier $IMAGE_REPO:$NEW_VERSION"
           else
             echo "⚠️  server.json not found, skipping"
           fi
