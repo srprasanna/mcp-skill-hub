@@ -585,6 +585,34 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 - **Mypy** for type checking (strict mode)
 - **Pytest** for testing (>80% coverage)
 
+## Releases
+
+This project uses automated releases via GitHub Actions.
+
+### Creating a Release
+
+1. Go to **Actions** → **Release** workflow
+2. Click **Run workflow**
+3. Choose version bump type:
+   - `patch` - Bug fixes (0.1.0 → 0.1.1)
+   - `minor` - New features (0.1.0 → 0.2.0)
+   - `major` - Breaking changes (0.1.0 → 1.0.0)
+   - Or specify exact version (e.g., `1.2.3`)
+4. Select Docker registry (`docker.io` or `ghcr.io`)
+5. Click **Run workflow**
+
+The workflow will:
+- ✅ Bump version in `pyproject.toml`
+- ✅ Create Git tag and GitHub release
+- ✅ Build and push Docker image
+- ✅ Run tests to verify release
+
+**Docker Images:**
+- Docker Hub: `{username}/mcp-skills-server:{version}`
+- GitHub: `ghcr.io/{owner}/mcp-skills-server:{version}`
+
+See [RELEASING.md](RELEASING.md) for detailed release documentation.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

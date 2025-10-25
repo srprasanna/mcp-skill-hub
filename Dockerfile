@@ -1,6 +1,16 @@
 # Stage 1: Builder
 FROM python:3.13-slim as builder
 
+# Build argument for version
+ARG VERSION=0.1.0
+
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    curl \
+    build-essential && \
+    rm -rf /var/lib/apt/lists/*
+
 # Install Poetry
 RUN pip install poetry==1.7.1
 
@@ -21,6 +31,9 @@ RUN --mount=type=cache,target=$POETRY_CACHE_DIR \
 
 # Stage 2: Runtime
 FROM python:3.13-slim as runtime
+
+# Build argument for version (must be redeclared in each stage)
+ARG VERSION=0.1.0
 
 # Create non-root user
 RUN useradd -m -u 1000 appuser
@@ -46,9 +59,20 @@ ENV MCP_SKILLS_DIR=/skills \
     MCP_SKILLS_HOT_RELOAD=true \
     MCP_SKILLS_LOG_LEVEL=INFO
 
-# Health check (optional - for future use)
-# HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-#   CMD python -c "from pathlib import Path; exit(0 if Path('/skills').exists() else 1)"
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python -c "import mcp_skills; print('OK')" || exit 1
+
+# Expose volume for skills
+VOLUME ["/skills"]
+
+# Labels
+LABEL org.opencontainers.image.title="MCP Skills Server" \
+      org.opencontainers.image.description="Dynamic skill loading MCP server with hot-reload support" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.vendor="Beehyv" \
+      org.opencontainers.image.licenses="MIT" \
+      org.opencontainers.image.source="https://github.com/yourusername/mcp-skills-server"
 
 # Entry point
 ENTRYPOINT ["python", "-m", "mcp_skills"]
