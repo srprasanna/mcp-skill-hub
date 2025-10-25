@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mcp-skills-server"
-version = "0.1.0"
+version = "0.2.0"
 description = "MCP server for dynamic Claude skill loading with hot-reload support"
 authors = ["Prasanna Raghu"]
 readme = "README.md"
