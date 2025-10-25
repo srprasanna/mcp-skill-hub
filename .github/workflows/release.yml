@@ -14,8 +14,13 @@ on:
         type: choice
         options:
           - 'docker.io'
-          - 'ghcr.io'
         default: 'docker.io'
+
+# Grant permissions to the workflow
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
 
 env:
   PYTHON_VERSION: '3.13'
