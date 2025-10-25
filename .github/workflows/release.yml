@@ -82,11 +82,30 @@ jobs:
           echo "version_tag=v$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "New version: $NEW_VERSION"
 
+      - name: Update server.json version
+        run: |
+          # Update server.json to match pyproject.toml version
+          NEW_VERSION="${{ steps.bump.outputs.new_version }}"
+
+          if [ -f "server.json" ]; then
+            jq --arg version "$NEW_VERSION" '.version = $version' server.json > server.json.tmp
+            mv server.json.tmp server.json
+            echo "✅ Updated server.json to version $NEW_VERSION"
+          else
+            echo "⚠️  server.json not found, skipping"
+          fi
+
       - name: Commit version bump
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add pyproject.toml
+
+          # Also commit server.json if it was updated
+          if [ -f "server.json" ]; then
+            git add server.json
+          fi
+
           git commit -m "chore: bump version to ${{ steps.bump.outputs.new_version }}"
 
       - name: Push changes

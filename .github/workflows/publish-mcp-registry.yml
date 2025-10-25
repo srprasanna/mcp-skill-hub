@@ -29,6 +29,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - id: install-jq
+        name: Install jq
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
       - name: Get version from pyproject.toml
         id: get_version
         run: |
@@ -42,6 +49,21 @@ jobs:
           jq --arg version "${{ steps.get_version.outputs.version }}" '.version = $version' server.json > server.json.tmp
           mv server.json.tmp server.json
           echo "Updated server.json to version ${{ steps.get_version.outputs.version }}"
+
+      - name: Commit server.json version update
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+          # Check if there are changes
+          if git diff --quiet server.json; then
+            echo "No changes to server.json"
+          else
+            git add server.json
+            git commit -m "chore: update server.json version to ${{ steps.get_version.outputs.version }}"
+            git push
+            echo "✅ Committed server.json version update"
+          fi
 
       - name: Validate server.json
         run: |
