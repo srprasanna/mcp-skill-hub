@@ -62,7 +62,7 @@ async def main() -> None:
 
     # Display startup banner
     logger.info("=" * 70)
-    logger.info("MCP Skills Server - Dynamic Claude Skill Loading")
+    logger.info("MCP Skills Server - Dynamic Skill Loading")
     logger.info("=" * 70)
     logger.info("")
     logger.info("IMPORTANT: Each skill MUST be in its own dedicated folder:")

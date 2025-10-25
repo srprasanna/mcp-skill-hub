@@ -40,7 +40,7 @@ class SkillParser(ABC):
         Args:
             skills_dir: Root directory containing skill folders
         """
-        self.skills_dir = Path(skills_dir)
+        self.skills_dir = Path(skills_dir).resolve()
 
     @abstractmethod
     def parse(self, path: Path) -> Optional[Skill]:

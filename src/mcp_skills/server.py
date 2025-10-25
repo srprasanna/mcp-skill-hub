@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 class SkillsServer:
     """
-    MCP server for dynamically loading and serving Claude skills.
+    MCP server for dynamically loading and serving skills.
 
     This server:
     1. Scans a directory for skill folders (each with SKILL.md)
@@ -147,7 +147,18 @@ class SkillsServer:
                 loop=loop,
                 debounce_delay=self.config.debounce_delay,
             )
-            self.watcher.start()
+            try:
+                self.watcher.start()
+            except TypeError as e:
+                if "handle" in str(e) and "_ThreadHandle" in str(e):
+                    logger.warning(
+                        "Hot reload is not compatible with Python 3.13 due to watchdog library limitations. "
+                        "Hot reload has been disabled. The server will continue without file watching. "
+                        "Set MCP_SKILLS_HOT_RELOAD=false in your .env file to suppress this warning."
+                    )
+                    self.watcher = None
+                else:
+                    raise
 
         logger.info("MCP Skills Server started successfully")
         logger.info(f"Serving {self.repository.count()} skill(s)")

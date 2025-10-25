@@ -1,7 +1,7 @@
 """
 Skill data model.
 
-This module defines the Skill Pydantic model that represents a Claude skill
+This module defines the Skill Pydantic model that represents a skill
 loaded from a SKILL.md file within a dedicated skill folder.
 
 **IMPORTANT**: Skills must be located in their own folders:
@@ -18,7 +18,7 @@ from pydantic import BaseModel, Field, field_validator
 
 class Skill(BaseModel):
     """
-    Represents a Claude skill with metadata and content.
+    Represents a skill with metadata and content.
 
     A skill must be located in a dedicated folder within the skills directory:
         /skills/

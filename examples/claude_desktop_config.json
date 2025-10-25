@@ -1,0 +1,31 @@
+{
+  "$comment": "Example configuration for Claude Desktop. Copy the 'mcpServers' section to your actual claude_desktop_config.json file located at: Windows: %APPDATA%/Claude/claude_desktop_config.json, macOS: ~/Library/Application Support/Claude/claude_desktop_config.json",
+  "mcpServers": {
+    "skills": {
+      "comment": "Using Docker (recommended for production)",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-v",
+        "${HOME}/skills:/skills:ro",
+        "mcp-skills-server"
+      ]
+    },
+    "skills-dev": {
+      "comment": "Using Poetry directly (development)",
+      "command": "poetry",
+      "args": [
+        "run",
+        "mcp-skills"
+      ],
+      "cwd": "c:\\Users\\prasanna\\projects\\beehyv\\code\\mcp-skill-hub",
+      "env": {
+        "MCP_SKILLS_DIR": "c:\\Users\\prasanna\\projects\\beehyv\\code\\mcp-skill-hub\\examples\\skills",
+        "MCP_SKILLS_LOG_LEVEL": "INFO",
+        "MCP_SKILLS_HOT_RELOAD": "false"
+      }
+    }
+  }
+}

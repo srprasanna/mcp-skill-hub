@@ -9,10 +9,28 @@ import logging
 from pathlib import Path
 from typing import Optional
 
+from dotenv import load_dotenv
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 logger = logging.getLogger(__name__)
+
+# Try to find .env file in current directory or project root
+ENV_FILE = Path(".env")
+if not ENV_FILE.exists():
+    # Try parent directories
+    for parent in [Path.cwd(), Path(__file__).parent.parent.parent]:
+        candidate = parent / ".env"
+        if candidate.exists():
+            ENV_FILE = candidate
+            break
+
+# Load .env file explicitly using python-dotenv
+# This ensures environment variables are set before Pydantic reads them
+# Don't load during tests to avoid interfering with test isolation
+import sys
+if ENV_FILE.exists() and "pytest" not in sys.modules:
+    load_dotenv(ENV_FILE)
 
 
 class ServerConfig(BaseSettings):
@@ -66,20 +84,21 @@ class ServerConfig(BaseSettings):
     """
 
     model_config = SettingsConfigDict(
-        env_prefix="MCP_SKILLS_",
-        env_file=".env",
-        env_file_encoding="utf-8",
         case_sensitive=False,
+        extra="ignore",  # Ignore extra fields from environment
+        populate_by_name=True,  # Allow both field name and alias
     )
 
     skills_dir: Path = Field(
         default=Path("/skills"),
         description="Root directory containing skill folders (each skill in its own folder)",
+        validation_alias="MCP_SKILLS_DIR",
     )
 
     hot_reload: bool = Field(
         default=True,
         description="Enable hot-reloading of skills when SKILL.md files change",
+        validation_alias="MCP_SKILLS_HOT_RELOAD",
     )
 
     debounce_delay: float = Field(
@@ -87,11 +106,13 @@ class ServerConfig(BaseSettings):
         ge=0.0,
         le=10.0,
         description="Debounce delay in seconds for file change events",
+        validation_alias="MCP_SKILLS_DEBOUNCE_DELAY",
     )
 
     log_level: str = Field(
         default="INFO",
         description="Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)",
+        validation_alias="MCP_SKILLS_LOG_LEVEL",
     )
 
     scan_depth: int = Field(
@@ -99,6 +120,7 @@ class ServerConfig(BaseSettings):
         ge=1,
         le=1,
         description="Scan depth for skill folders (should always be 1)",
+        validation_alias="MCP_SKILLS_SCAN_DEPTH",
     )
 
     def configure_logging(self) -> None:

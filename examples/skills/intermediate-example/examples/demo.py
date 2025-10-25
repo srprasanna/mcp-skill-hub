@@ -20,7 +20,7 @@ def greet(name: str) -> str:
 
 def main() -> None:
     """Main function."""
-    print(greet("Claude"))
+    print(greet("World"))
     print("\nThis is an example file referenced in the SKILL.md frontmatter.")
     print("Example files can be any format: .py, .txt, .md, .json, etc.")
 

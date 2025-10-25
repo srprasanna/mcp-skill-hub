@@ -1,8 +1,8 @@
 """
-MCP Skills Server - Dynamic Claude skill loading with hot-reload support.
+MCP Skills Server - Dynamic skill loading with hot-reload support.
 
 This package provides a production-ready MCP server that dynamically loads
-and exposes Claude skills from a mounted volume with hot-reloading capabilities.
+and exposes skills from a mounted volume with hot-reloading capabilities.
 
 **CRITICAL**: Each skill MUST be in its own dedicated folder within the skills directory.
 The server will ONLY recognize skills that follow this structure:

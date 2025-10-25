@@ -122,7 +122,7 @@
 - [x] **.gitignore** - Comprehensive ignore patterns
 - [x] **.env.example** - Example environment configuration
 - [x] **LICENSE** - MIT License
-- [x] **examples/claude-config.json** - Claude Desktop config examples
+- [x] **examples/claude_desktop_config.json** - Example Claude Desktop config
 
 ### Testing
 - [x] **tests/conftest.py** - Pytest fixtures

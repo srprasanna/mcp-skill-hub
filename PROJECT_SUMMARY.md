@@ -45,7 +45,7 @@ mcp-skills-server/
 │   │   ├── minimal-example/
 │   │   ├── intermediate-example/
 │   │   └── advanced-example/
-│   └── claude-config.json          # Claude Desktop config
+│   └── claude_desktop_config.json  # Example Claude Desktop config
 │
 ├── docs/                           # Documentation
 │   ├── README.md                   # Main documentation
