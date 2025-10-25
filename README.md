@@ -611,7 +611,7 @@ The workflow will:
 - Docker Hub: `{username}/mcp-skills-server:{version}`
 - GitHub: `ghcr.io/{owner}/mcp-skills-server:{version}`
 
-See [RELEASING.md](RELEASING.md) for detailed release documentation.
+See [RELEASING.md](docs/RELEASING.md) for detailed release documentation.
 
 ## License
 
