@@ -21,6 +21,7 @@ permissions:
   contents: write
   packages: write
   pull-requests: write
+  actions: write
 
 env:
   PYTHON_VERSION: '3.13'
