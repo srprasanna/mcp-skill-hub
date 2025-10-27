@@ -3,7 +3,7 @@
 [![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
 [![Poetry](https://img.shields.io/badge/poetry-1.7+-blue.svg)](https://python-poetry.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![MCP Registry](https://img.shields.io/badge/MCP-Registry-purple.svg)](https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skill-hub)
+[![MCP Registry](https://img.shields.io/badge/MCP-Registry-purple.svg)](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.srprasanna%2Fmcp-skill-hub/versions)
 [![Docker](https://img.shields.io/docker/v/srprasanna/mcp-skill-hub?label=docker)](https://hub.docker.com/r/srprasanna/mcp-skill-hub)
 
 A production-ready [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that dynamically loads and exposes skills from a mounted volume with hot-reloading support.
