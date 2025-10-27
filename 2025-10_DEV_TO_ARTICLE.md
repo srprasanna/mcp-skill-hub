@@ -86,7 +86,7 @@ Your Claude skills are just the beginning. The MCP Skills Hub takes that same fa
 
 And since it's MCP-compliant, you can use those skills with any compatible AI agent, not just Claude.
 
-**Ready to escape the sandbox?** Check out the [MCP Skill Hub on GitHub](https://github.com/srprasanna/mcp-skill-hub) or install directly from the [MCP Registry]((https://registry.modelcontextprotocol.io/v0.1/servers/io.github.srprasanna%2Fmcp-skill-hub/versions).
+**Ready to escape the sandbox?** Check out the [MCP Skill Hub on GitHub](https://github.com/srprasanna/mcp-skill-hub) or install directly from the [MCP Registry](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.srprasanna%2Fmcp-skill-hub/versions).
 
 Your skills deserve to run free. 🚀
 
