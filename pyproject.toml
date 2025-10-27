@@ -5,8 +5,8 @@ description = "MCP server for dynamic Claude skill loading with hot-reload suppo
 authors = ["Prasanna Raghu"]
 readme = "README.md"
 license = "MIT"
-homepage = "https://github.com/yourusername/mcp-skill-hub"
-repository = "https://github.com/yourusername/mcp-skill-hub"
+homepage = "https://github.com/srprasanna/mcp-skill-hub"
+repository = "https://github.com/srprasanna/mcp-skill-hub"
 keywords = ["mcp", "claude", "skills", "ai", "llm"]
 classifiers = [
     "Development Status :: 4 - Beta",

@@ -13,7 +13,7 @@ Get up and running with MCP Skills Server in 5 minutes!
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/mcp-skill-hub.git
+git clone https://github.com/srprasanna/mcp-skill-hub.git
 cd mcp-skill-hub
 
 # Install dependencies

@@ -452,7 +452,7 @@ Any other context, examples, or screenshots.
 
 If you have questions:
 1. Check the [README](README.md)
-2. Look through existing [issues](https://github.com/yourusername/mcp-skill-hub/issues)
+2. Look through existing [issues](https://github.com/srprasanna/mcp-skill-hub/issues)
 3. Open a new issue with your question
 
 ## Recognition

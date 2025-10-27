@@ -8,7 +8,7 @@
 
 A production-ready [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that dynamically loads and exposes skills from a mounted volume with hot-reloading support.
 
-> 📦 **Available on [MCP Registry](https://registry.modelcontextprotocol.io/servers/io.github.srprasanna/mcp-skill-hub)** - Install with one command!
+> 📦 **Available on [MCP Registry](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.srprasanna%2Fmcp-skill-hub/versions)** - Install with one command!
 
 ## Features
 
@@ -123,7 +123,7 @@ docker run -i --rm \
 1. **Clone and install:**
 
 ```bash
-git clone https://github.com/yourusername/mcp-skill-hub.git
+git clone https://github.com/srprasanna/mcp-skill-hub.git
 cd mcp-skill-hub
 poetry install
 ```
@@ -154,7 +154,7 @@ poetry run mcp-skills
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/mcp-skill-hub.git
+git clone https://github.com/srprasanna/mcp-skill-hub.git
 cd mcp-skill-hub
 
 # Install dependencies
@@ -411,7 +411,7 @@ List all valid skill folders found in the skills directory.
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/mcp-skill-hub.git
+git clone https://github.com/srprasanna/mcp-skill-hub.git
 cd mcp-skill-hub
 
 # Install dependencies (including dev dependencies)
