@@ -15,7 +15,7 @@ Your skills can show examples and explain concepts, but they can't actually *do*
 
 ## Skills That Actually Work
 
-The [MCP Skills Hub](https://github.com/srprasanna/mcp-skill-hub) changes everything. It takes your existing Claude Skills (same YAML frontmatter format, same Markdown content) and runs them locally through the [Model Context Protocol](https://modelcontextprotocol.io).
+The [MCP Skill Hub](https://github.com/srprasanna/mcp-skill-hub) changes everything. It takes your existing Claude Skills (same YAML frontmatter format, same Markdown content) and runs them locally through the [Model Context Protocol](https://modelcontextprotocol.io).
 
 Check out the examples in [srprasanna/mcp-skill-hub](https://github.com/srprasanna/mcp-skill-hub) for working code.
 
@@ -34,7 +34,7 @@ Check out the examples in [srprasanna/mcp-skill-hub](https://github.com/srprasan
 
 ## Beyond Claude: Any Agent, Any Model
 
-Here's the kicker – you're not locked into Claude anymore. The MCP Skills Hub works with:
+Here's the kicker – you're not locked into Claude anymore. The MCP Skill Hub works with:
 
 - **Claude Desktop** (obvious choice)
 - **Cline/Cursor** (VS Code integration)
@@ -82,7 +82,7 @@ Hot-reload is built-in – edit your skills and see changes instantly without re
 
 ## The Bottom Line
 
-Your Claude skills are just the beginning. The MCP Skills Hub takes that same familiar format and removes all the limitations. Your skills can finally do real work – read files, make API calls, automate your actual workflow.
+Your Claude skills are just the beginning. The MCP Skill Hub takes that same familiar format and removes all the limitations. Your skills can finally do real work – read files, make API calls, automate your actual workflow.
 
 And since it's MCP-compliant, you can use those skills with any compatible AI agent, not just Claude.
 
