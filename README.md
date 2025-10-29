@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![MCP Registry](https://img.shields.io/badge/MCP-Registry-purple.svg)](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.srprasanna%2Fmcp-skill-hub/versions)
 [![Docker](https://img.shields.io/docker/v/srprasanna/mcp-skill-hub?label=docker)](https://hub.docker.com/r/srprasanna/mcp-skill-hub)
+[![Docker Pulls](https://img.shields.io/docker/pulls/srprasanna/mcp-skill-hub)](https://hub.docker.com/r/srprasanna/mcp-skill-hub)
 
 A production-ready [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that dynamically loads and exposes skills from a mounted volume with hot-reloading support.
 
